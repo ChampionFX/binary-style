@@ -50,7 +50,7 @@ input[type=radio] {
                 content: '';
                 width: 10px;
                 height: 10px;
-                background: $primaryBrandColor;
+                background: $secondaryBorderColor;
                 position: absolute;
                 top: 4px;
                 left: 4px;
@@ -58,7 +58,7 @@ input[type=radio] {
                 transition: all 0.2s ease;
             }
             &:hover:before, &:active:before, &:focus:before {
-                border: 1px solid $primaryBrandColor;
+                border: 1px solid $secondaryBorderColor;
             }
         }
     }
@@ -67,7 +67,7 @@ input[type=radio] {
         transform: scale(0);
     }
     &:checked + label:before {
-        border: 1px solid $primaryBrandColor;
+        border: 1px solid $secondaryBorderColor;
     }
     &:checked + label:after {
         opacity: 1;
@@ -92,7 +92,7 @@ input[type=checkbox] {
             margin-right: 5px;
             width: 16px;
             height: 16px;
-            border-radius: $BORDER_RADIUS;
+            border-radius: $border-radius;
         }
     }
     &:checked + label:before {
