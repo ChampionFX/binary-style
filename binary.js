@@ -46,14 +46,26 @@ function navMenuListener() {
 		}
     });
 
-	$('.navbar__nav__toggle').click(function(e) {
-		e.stopPropagation();
-		$(this).next('.navbar__nav__menu').toggleClass('navbar__nav__menu--show');	
-		$(this).parent().siblings().find('.navbar__nav__menu--show').removeClass('navbar__nav__menu--show');
-	});
-	if ($('.has-accounts').length) {
-		$('#toggle-menu').append(`<div class="account-info">${$('.account-info').html()}</div>`);
-	}
+  	if ($('.has-accounts').length) {
+  		  $('#toggle-menu').append(`<div class="account-info">${$('.account-info').html()}</div>`);
+  	}
+
+    // used to detect touch events, if false, use hover for menu dropdown
+    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch || navigator.msMaxTouchPoints || navigator.maxTouchPoints ) {
+        $('.navbar__nav__toggle').click(function(e) {
+            e.stopPropagation();
+            $(this).next('.navbar__nav__menu').toggleClass('navbar__nav__menu--show');
+            $(this).parent().siblings().find('.navbar__nav__menu--show').removeClass('navbar__nav__menu--show');
+        });
+    } else {
+        $('.navbar__nav__menu li').hover(
+            function() {
+                $(this).children('li ul').addClass('navbar__nav__menu--show');
+            },
+            function() {
+                $(this).children('li ul').removeClass('navbar__nav__menu--show');
+            });
+    }
 }
 
 function topNavMenuListener() {
@@ -194,11 +206,11 @@ $(document).ready(function() {
     documentListener();
     langListener();
     tabListener();
-	
+
 	// calculate mobile menu height
-	$('.navbar__nav').height($(window).innerHeight());		
-	$(window).on('orientationchange resize', () => {	
-		$('.navbar__nav').height($(window).innerHeight());		
+	$('.navbar__nav').height($(window).innerHeight());
+	$(window).on('orientationchange resize', () => {
+		$('.navbar__nav').height($(window).innerHeight());
 	});
 });
 
